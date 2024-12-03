@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/api/bosses")
+@RequestMapping("/api/bosses")
 public class BossController {
     @Autowired
     private BossService bossService;
@@ -17,7 +17,7 @@ public class BossController {
         Boss savedBoss = bossService.addBoss(boss);
         return ResponseEntity.ok(savedBoss);
     }
-    @PutMapping("/bosses/update-salaries")
+    @PutMapping("/update-salaries")
     public String updateBossSalaries(
             @RequestParam Float increment,
             @RequestParam Float ratingThreshold) {

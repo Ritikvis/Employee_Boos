@@ -26,7 +26,7 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getEmployeesUnderAgeAndWithRating(age, rating);
         return ResponseEntity.ok(employees);
     }
-    @GetMapping("/employees/count-by-rating")
+    @GetMapping("/count-by-rating")
     public long countEmployeesByBossAndEmployeeRating(
             @RequestParam Float ratingThreshold) {
         return employeeService.countEmployeesWithBossAndEmployeeRatingAbove(ratingThreshold);
