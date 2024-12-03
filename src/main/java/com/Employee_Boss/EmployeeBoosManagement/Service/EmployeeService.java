@@ -1,6 +1,8 @@
 package com.Employee_Boss.EmployeeBoosManagement.Service;
 
+import com.Employee_Boss.EmployeeBoosManagement.Entity.Boss;
 import com.Employee_Boss.EmployeeBoosManagement.Entity.Employee;
+import com.Employee_Boss.EmployeeBoosManagement.Repository.BossRepository;
 import com.Employee_Boss.EmployeeBoosManagement.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,10 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private BossRepository bossRepository;
 
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
+
     public long countEmployeesWithBossAndEmployeeRatingAbove(Float ratingThreshold) {
         // Fetch all employees
         List<Employee> allEmployees = employeeRepository.findAll();
@@ -47,4 +49,10 @@ public class EmployeeService {
         return filteredEmployees;
     }
 
+    public Employee addEmployee(Employee employee, Long bossId) {
+        Boss boss = bossRepository.findById(String.valueOf(bossId))
+                .orElseThrow(()-> new RuntimeException("Id Not found"));
+        employee.setBoss(boss);
+        return  employeeRepository.save(employee);
+    }
 }

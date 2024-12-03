@@ -12,11 +12,16 @@ public class BossController {
     @Autowired
     private BossService bossService;
 
+
+//    http://localhost:8080/api/bosses/add
     @PostMapping("add")
     public ResponseEntity<Boss> addBoss(@RequestBody Boss boss) {
         Boss savedBoss = bossService.addBoss(boss);
         return ResponseEntity.ok(savedBoss);
     }
+
+
+//    http://localhost:8080/api/employees/update-salaries?increment=5000&ratingThreshold=4.6
     @PutMapping("/update-salaries")
     public String updateBossSalaries(
             @RequestParam Float increment,
